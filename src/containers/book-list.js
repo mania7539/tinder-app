@@ -43,4 +43,7 @@ export default connect(mapStateToProps)(BookList);
 /**
  * We only export the container in a container ('connect', and custom map function), 
  * not the actual class content in the container
+ * 
+ * With the forge of connect, once the state in mapStateToProps is changed, 
+ * the BookList will be re-rendered
  */
