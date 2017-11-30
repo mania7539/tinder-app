@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import BookList from '../containers/book-list';
 
 // Create a new component. 
