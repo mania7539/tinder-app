@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { selectBook } from "../actions/index";
+import { bindActionCreators } from "redux";
 
 class BookList extends Component {
     renderList() {
@@ -7,7 +9,7 @@ class BookList extends Component {
             return (
                 <li key={book.title} className="list-group-item">
                     {book.title}
-                </li>   
+                </li>
             );
         });
     }
@@ -39,8 +41,26 @@ function mapStateToProps(state) {
  * Our books reducer will produce our book property for above code (state.books)
 */
 
-export default connect(mapStateToProps)(BookList);
+function mapDispatchToProps(dispatch) {
+    // Whatever is returned in this function will show up as props 
+    //      on the BookList container
+    // Whenever selectBook of actions is called, 
+    //      the result should be passed to all of the reducers
+    return bindActionCreators({ selectBook: selectBook }, dispatch);
+    /**
+     * The purpose of BIND action creators and dispatch
+     * is specifically to take what gets returned from selectBook
+     * and make sure it flows thru all the reducers
+     */
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookList);
 /**
+ * Promote BookList from a component to a container 
+ * - it needs to know about the dispatch method, selectBook.
+ * Make it available as a prop
+ * 
  * We only export the container in a container ('connect', and custom map function), 
  * not the actual class content in the container
  * 
